@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLAMES</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    #login-container {
+      background: url('https://media-api.xogrp.com/images/7f87c7c1-7fad-433b-b78f-7a633bc1c73a~cr_0.0.1619.1085?quality=50') no-repeat center center fixed;
+    }
+
+    #result-container {
+      background: url('https://static.vecteezy.com/system/resources/previews/020/302/913/original/red-heart-valentine-theme-background-texture-free-vector.jpg') no-repeat center center fixed;
+    }
+
+    .content {
+      background-color: #ffd9e6; /* Light pink background color */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #ff3860;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #ff3860;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #e31c5f;
+    }
+
+    .result-container {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+    }
+
+    .result-container.show {
+      display: block;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .result-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+
+    .heart {
+      color: #ff3860;
+      font-size: 4em;
+      animation: heartbeat 1s infinite alternate;
+    }
+
+    @keyframes heartbeat {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.1);
+      }
+    }
+
+    .rose {
+      position: absolute;
+      width: 50px;
+      height: auto;
+      z-index: 0;
+    }
+
+    .rose1 {
+      top: -50px;
+      left: 10%;
+      animation: rose-fall 6s linear infinite;
+    }
+
+    .rose2 {
+      top: -50px;
+      left: 30%;
+      animation: rose-fall 5s linear infinite;
+    }
+
+    .rose3 {
+      top: -50px;
+      left: 50%;
+      animation: rose-fall 7s linear infinite;
+    }
+
+    .rose4 {
+      top: -50px;
+      left: 70%;
+      animation: rose-fall 4s linear infinite;
+    }
+
+    @keyframes rose-fall {
+      0% {
+        opacity: 0;
+        transform: translateY(-100px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="login-container" class="container">
+    <div class="content" id="login-content">
+      <h1>FLAMES <span class="heart">❤️</span></h1>
+      <img src="https://png.pngtree.com/png-clipart/20220306/original/pngtree-single-rose-petal-matting-free-png-image_7416726.png" class="rose rose1">
+      <img src="https://png.pngtree.com/png-clipart/20220306/original/pngtree-single-rose-petal-matting-free-png-image_7416726.png" class="rose rose2">
+      <img src="https://png.pngtree.com/png-clipart/20220306/original/pngtree-single-rose-petal-matting-free-png-image_7416726.png" class="rose rose3">
+      <img src="https://png.pngtree.com/png-clipart/20220306/original/pngtree-single-rose-petal-matting-free-png-image_7416726.png" class="rose rose4">
+      <form id="login-form">
+        <div class="form-group">
+          <label for="male">Male Name:</label>
+          <input type="text" id="male" name="male" required>
+        </div>
+        <div class="form-group">
+          <label for="female">Female Name:</label>
+          <input type="text" id="female" name="female" required>
+        </div>
+        <button type="submit">Calculate</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="result-container" class="container result-container">
+    <div class="content result-content">
+      <h1>FLAMES Result</h1>
+      <p>Congratulations! It's a match made in heaven.</p>
+      <span class="heart">❤️</span>
+      <div class="quote" id="quote"></div>
+    </div>
+    <img src="https://png.pngtree.com/png-clipart/20220306/original/pngtree-single-rose-petal-matting-free-png-image_7416726.png" class="rose rose1">
+    <img src="https://png.pngtree.com/png-clipart/20220306/original/pngtree-single-rose-petal-matting-free-png-image_7416726.png" class="rose rose2">
+    <img src="https://png.pngtree.com/png-clipart/20220306/original/pngtree-single-rose-petal-matting-free-png-image_7416726.png" class="rose rose3">
+    <img src="https://png.pngtree.com/png-clipart/20220306/original/pngtree-single-rose-petal-matting-free-png-image_7416726.png" class="rose rose4">
+  </div>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      var maleName = document.getElementById('male').value.trim();
+      var femaleName = document.getElementById('female').value.trim();
+
+      // Perform FLAMES calculation here (omitted for simplicity)
+
+      // Show result container
+      document.getElementById('login-container').style.display = 'none';
+      document.getElementById('result-container').classList.add('show');
+
+      // Define an array of quotes
+      var quotes = [
+        "Love is like the wind, you can't see it but you can feel it.",
+        "I have died every day waiting for you. Darling, don’t be afraid. I have loved you for a thousand years. I’ll love you for a thousand more.",
+        "I saw that you were perfect, and so I loved you. Then I saw that you were not perfect and I loved you even more.",
+        "I wish I could turn back the clock. I’d find you sooner and love you longer.",
+        "You are my heart, my life, my one and only thought.",
+        "Every time I see you, I fall in love all over again. - Unknown",
+        "The best thing to hold onto in life is each other.",
+        "You don’t love someone for their looks, or their clothes, or for their fancy car, but because they sing a song only you can hear.",
+        "Love is not just looking at each other, it's looking in the same direction.",
+        "In all the world, there is no heart for me like yours.",
+        "The greatest happiness you can have is knowing that you do not necessarily require happiness.",
+        "The best love is the kind that awakens the soul; that makes us reach for more, that plants the fire in our hearts and brings peace to our minds.",
+        "I love you not only for what you are, but for what I am when I am with you.",
+        "Love is composed of a single soul inhabiting two bodies.",
+        "The best and most beautiful things in this world cannot be seen or even heard, but must be felt with the heart.",
+        "Love is when you meet someone who tells you something new about yourself.",
+        "There is never a time or place for true love. It happens accidentally, in a heartbeat, in a single flashing, throbbing moment.",
+        "I fell in love the way you fall asleep: slowly, and then all at once.",
+        "I have waited for this opportunity for more than half a century, to repeat to you once again my vow of eternal fidelity and everlasting love.",
+        "I would rather spend one lifetime with you, than face all the ages of this world alone.",
+        "The best love is the kind that awakens the soul; that makes us reach for more, that plants the fire in our hearts and brings peace to our minds.",
+        "I love you without knowing how, or when, or from where. I love you simply, without problems or pride: I love you in this way because I do not know any other way of loving but this.",
+        "I want you. All of you. Your flaws. Your mistakes. Your imperfections. I want you, and only you.",
+        "You have bewitched me, body and soul, and I love, I love, I love you. I never wish to be parted from you from this day on.",
+        "I love you as one loves certain dark things, secretly, between the shadow and the soul.",
+        "When I saw you I fell in love, and you smiled because you knew.",
+        "To love or have loved, that is enough. Ask nothing further. There is no other pearl to be found in the dark folds of life.",
+        "I have waited for this opportunity for more than half a century, to repeat to you once again my vow of eternal fidelity and everlasting love.",
+        "I love you without knowing how, or when, or from where. I love you simply, without problems or pride: I love you in this way because I do not know any other way of loving but this.",
+        "I want you. All of you. Your flaws. Your mistakes. Your imperfections. I want you, and only you.",
+        "You have bewitched me, body and soul, and I love, I love, I love you. I never wish to be parted from you from this day on.",
+        "I love you as one loves certain dark things, secretly, between the shadow and the soul.",
+        "When I saw you I fell in love, and you smiled because you knew.",
+        "To love or have loved, that is enough. Ask nothing further. There is no other pearl to be found in the dark folds of life."
+      ];
+
+      // Function to select a random quote
+      function getRandomQuote() {
+        return quotes[Math.floor(Math.random() * quotes.length)];
+      }
+
+      // Display a random quote
+      document.getElementById('quote').textContent = getRandomQuote();
+    });
+    
+  </script>
+</body>
+</html>
